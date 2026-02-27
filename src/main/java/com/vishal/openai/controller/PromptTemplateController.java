@@ -1,6 +1,8 @@
 package com.vishal.openai.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,12 +20,15 @@ public class PromptTemplateController {
 
     String promptTemplate = """
             A Customer named {customerName} sent the following message: {customerMessage}
-            
+
             Write a polite and helpful email response addressing the issue.
             Maintain a professional tone and provide reassurance.
-            
+
             Respond as if you are writing the email body only. Don't include subject, signature.
             """;
+
+//    @Value("src/main/resources/promptTemplate/userPromptTemplate.st")
+//    Resource userPromptTemplate;
 
     @GetMapping("/email")
     public String chatWithSystem(@RequestParam("customerName") String customerName, @RequestParam("customerMessage") String customerMessage) {
