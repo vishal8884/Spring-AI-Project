@@ -27,8 +27,8 @@ public class PromptTemplateController {
             Respond as if you are writing the email body only. Don't include subject, signature.
             """;
 
-//    @Value("src/main/resources/promptTemplate/userPromptTemplate.st")
-//    Resource userPromptTemplate;
+    @Value("classpath:/promptTemplate/userPromptTemplate.st")
+    Resource userPromptTemplate;
 
     @GetMapping("/email")
     public String chatWithSystem(@RequestParam("customerName") String customerName, @RequestParam("customerMessage") String customerMessage) {
@@ -37,7 +37,7 @@ public class PromptTemplateController {
                         You are professional customer service assistant which helps drafting email response to improve
                         the productivity of the customer support team.
                         """)
-                .user(promptUserSpec -> promptUserSpec.text(promptTemplate)
+                .user(promptUserSpec -> promptUserSpec.text(userPromptTemplate)
                         .param("customerName",customerName)
                         .param("customerMessage",customerMessage))
                 .call()
