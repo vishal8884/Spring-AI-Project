@@ -1,0 +1,36 @@
+Message Roles in LLM's
+
+User           =  we are users
+System  = says how LLM should behave
+Assistant = response from LLM
+Function =
+
+
+org.springframework.ai.chat.messages.MessageType
+
+Defaults in spring AI
+Using prompt templates in Spring AI
+
+Here we have a template and ask users to pass the params.
+Example I have some template of system and user message displayed to LLM. We just update the customerName and customerMessage here.
+Using Prompt stuffing technique
+
+-> here we give some pretrained data to the LLM based on that it answers us
+-> Its used for minimal data only
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
