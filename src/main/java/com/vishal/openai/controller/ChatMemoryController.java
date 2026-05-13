@@ -1,11 +1,9 @@
 package com.vishal.openai.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -18,9 +16,10 @@ public class ChatMemoryController {
     }
 
     @GetMapping("/chatMemory")
-    public String chatWithSystem(@RequestParam("message") String message) {
+    public String chatWithSystem(@RequestHeader("userName") String userName, @RequestParam("message") String message) {
         return chatClient.prompt()
                 .user(message)
+                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID,userName))
                 .call()
                 .content();
     }
